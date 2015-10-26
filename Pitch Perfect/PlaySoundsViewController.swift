@@ -21,7 +21,6 @@ class PlaySoundsViewController: UIViewController {
     var audioEngine: AVAudioEngine!
     
     var audioPlayer: AVAudioPlayer!
-    var echoAudioPlayer: AVAudioPlayer!
     var receivedAudio: RecordedAudio!
     var audioFile:AVAudioFile!
     
@@ -31,7 +30,6 @@ class PlaySoundsViewController: UIViewController {
         audioEngine = AVAudioEngine()
         try! audioPlayer = AVAudioPlayer(contentsOfURL: receivedAudio.filePathUrl)
         audioPlayer.enableRate = true
-        try! echoAudioPlayer = AVAudioPlayer(contentsOfURL: receivedAudio.filePathUrl)
         try! audioFile = AVAudioFile(forReading: receivedAudio.filePathUrl)
         // Do any additional setup after loading the view.
     }
@@ -41,16 +39,6 @@ class PlaySoundsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     @IBAction func onSnailClicked(sender: UIButton) {
         playAudioWithRate(0.5)
     }
@@ -90,7 +78,6 @@ class PlaySoundsViewController: UIViewController {
     }
     
     func stopPlay() {
-        echoAudioPlayer.stop()
         audioPlayer.stop()
         audioEngine.stop()
         audioEngine.reset()
